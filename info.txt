@@ -1,0 +1,1 @@
+sshfs k005760@185.119.117.86:/home/k005760/technicus /home/jojo/Desktop/technicus
