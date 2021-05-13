@@ -1,3 +1,5 @@
+### crawls earthquake + wildfire data and writes it to .msgpack files ###
+
 import requests
 import json
 #import psycopg2
@@ -16,6 +18,7 @@ def get_earthquake_data():
     print('writing file...')
     with open('earthquake_data.msgpack', 'wb') as file:
         file.write(msgpack.packb(earthquake_data))
+    print('earthquakes done')
 
 
 def get_wildfire_data():
@@ -26,7 +29,7 @@ def get_wildfire_data():
     print('writing')
     with open('wildfire_data.msgpack', 'wb') as file:
         file.write(msgpack.packb(wildfire_data))
-    print('done')
+    print('wildfires done')
 
 def master():
     get_earthquake_data()

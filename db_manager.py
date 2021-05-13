@@ -1,3 +1,4 @@
+#fetches data from database, analyze() is writing to database
 import psycopg2
 import crawler
 import analyzer

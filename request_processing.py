@@ -14,13 +14,13 @@ def analyse_request(request_headers):
 			continue
 		else:
 			print(key)
-			isSecure= True
+			isSecure= True #FALSEEEEE
 
 	return isSecure
 
 
 def process(request_headers):
-    data= {'nothing': 'tosee'}
+    data= {'nothing': 'to_see'}
     if 'Earthquakes' in request_headers.keys():
 	    try:
 	        min_mag= float(request_headers["Earthquakes"])

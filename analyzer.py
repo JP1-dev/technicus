@@ -1,3 +1,4 @@
+#contains functions to extract the needed data from a dictionary and puts it into a database
 import psycopg2
 import time
 import math
