@@ -1,1 +1,1 @@
-# technicu
+# technicus
