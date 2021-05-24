@@ -1,9 +1,10 @@
-#fetches data from database, analyze() is writing to database
+#fetches data from database, feed_db() is writing to database
 import psycopg2
 import crawler
 import analyzer
 import time
 import msgpack
+import schedule
 
 
 def connect():
@@ -17,21 +18,24 @@ def connect():
     return connection
 
 
-def eq(min_mag):
+def get_earthquakes(min_mag):
     conn= connect()
     cursor= conn.cursor()
-    cursor.execute(f"SELECT longitude, latitude, mag,breakLength, time, type, tsunami, alert, place FROM earthquakes WHERE mag >= {min_mag};")
+    cursor.execute(f"SELECT longitude, latitude, mag,breakLength, tsunami FROM earthquakes WHERE mag >= {min_mag} AND type='earthquake';")
     data= cursor.fetchall()
     cursor.close()
     conn.close()
     return data
 
 
-
-
-#connection= connect()
-#cursor= connection.cursor()
-#cursor.execute(f"SELECT longitude, latitude, mag, place, time, type, tsunami, alert FROM earthquakes WHERE mag >= 2.8;")
+def get_wildfires():
+    conn= connect()
+    cursor= conn.cursor()
+    cursor.execute(f"""SELECT latitude, longitude, confidence FROM wildfires""")
+    data= cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return data
 
 
 def read_file(name):
@@ -46,11 +50,13 @@ def read_file(name):
             return data
 
 
-def analyze():
-    #worker= crawler.Worker_earthquakes('id1')
-    #worker.run()
-    #print('ok')
-    #time.sleep(5)
+def feed_db():
     analyzer.process_earthquakes(read_file('eq'))
     analyzer.process_wildfires(read_file('wildfires'))
     print('done')
+
+
+if __name__ == '__main__':
+    schedule.every(15).seconds.do(feed_db)
+    while True:
+        schedule.run_pending()

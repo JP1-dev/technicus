@@ -20,14 +20,14 @@ def analyse_request(request_headers):
 
 
 def process(request_headers):
-    data= {'nothing': 'to_see'}
-    if 'Earthquakes' in request_headers.keys():
-	    try:
-	        min_mag= float(request_headers["Earthquakes"])
-	    except BaseException:
-	        return '{"status": "error"}'
-	    data= db_manager.eq(min_mag)
-	    
-    return json.dumps(data)
+	if 'Earthquakes' in request_headers.keys():
+		try:
+			min_mag= float(request_headers["Earthquakes"])
+		except BaseException:
+			return '{"status": "error"}'
+		data= db_manager.get_earthquakes(min_mag)
+
+	elif 'Wildfires' in request_headers.keys():
+		return db_manager.get_wildfires()
 
 

@@ -5,6 +5,7 @@ import cv2 as cv
 import numpy as np
 from time import sleep
 
+url= 'https://worldview.earthdata.nasa.gov/?v=-106.50739748338336,-66.83922516244549,110.57324811213067,68.83617833475078&l=MODIS_Combined_Thermal_Anomalies_All,Reference_Labels_15m(hidden),Reference_Features_15m(hidden),Coastlines_15m,VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),VIIRS_SNPP_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor(hidden)&lg=true&t=2021-05-23-T15%3A25%3A19Z'
 
 def grab(img_base64):
     img_base64 = img_base64.split('base64,')[1]
@@ -15,15 +16,16 @@ def grab(img_base64):
     return image
 
 options= Options()
-options.headless= True
+options.headless= False
+
 
 print('loading Firefox...')
 driver= webdriver.Firefox(options= options, executable_path="./geckodriver")
-
+driver.fullscreen_window()
 print('open worldview.earthdata.nasa.gov...')
-driver.get('https://worldview.earthdata.nasa.gov/?v=-307.69227075855747,-172.79143899276977,265.9895122383497,150.24604119477436&l=MODIS_Combined_Thermal_Anomalies_All,Reference_Labels_15m(hidden),Reference_Features_15m(hidden),Coastlines_15m,VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),VIIRS_SNPP_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor(hidden)&lg=true&t=2021-05-23-T15%3A25%3A19Z')
+driver.get(url)
 print('sleep...')
-sleep(3)
+sleep(5)
 xpath_coastlines= '/html/body/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/canvas'
 xpath_fires= '/html/body/div[1]/div/div[4]/div[1]/div/div[1]/div[2]/canvas'
 
