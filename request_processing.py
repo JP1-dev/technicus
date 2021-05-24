@@ -28,6 +28,6 @@ def process(request_headers):
 		data= db_manager.get_earthquakes(min_mag)
 
 	elif 'Wildfires' in request_headers.keys():
-		return db_manager.get_wildfires()
+		return str(db_manager.get_wildfires())
 
 
