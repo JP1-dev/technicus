@@ -26,6 +26,7 @@ def process(request_headers):
 		except BaseException:
 			return '{"status": "error"}'
 		data= db_manager.get_earthquakes(min_mag)
+		return data
 
 	elif 'Wildfires' in request_headers.keys():
 		return str(db_manager.get_wildfires())
