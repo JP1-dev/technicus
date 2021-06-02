@@ -25,7 +25,10 @@ def get_earthquakes(min_mag):
     data= cursor.fetchall()
     cursor.close()
     conn.close()
-    return data
+    values= []
+    for element in data:
+        values.append(list(element))
+    return values
 
 
 def get_wildfires():
@@ -35,7 +38,10 @@ def get_wildfires():
     data= cursor.fetchall()
     cursor.close()
     conn.close()
-    return data
+    values= []
+    for element in data:
+        values.append(list(element))
+    return values
 
 
 def read_file(name):
