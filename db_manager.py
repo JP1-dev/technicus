@@ -27,7 +27,9 @@ def get_earthquakes(min_mag):
     conn.close()
     values= []
     for element in data:
-        values.append(list(element))
+        lst_element= list(element)
+        lst_element[4]= 0 if lst_element[4] == 'false' else 1
+        values.append(lst_element)
     return values
 
 
