@@ -4,7 +4,7 @@ import db_manager
 
 #list which contains the allowed header keys
 ALLOWED_HEADERS= ["Host", "Connection", "Cache-Control", "Upgrade-Insecure-Requests", "User-Agent",
-"Accept-Encoding", "Accept-Language","Content-Length","Accept","User-agent","Key","Earthquakes", "Wildfires","MinMag"]
+"Accept-Encoding", "Accept-Language","Content-Length","Accept","User-agent","Key","Earthquakes", "Wildfires","MinMag", "PushNews"]
 
 
 def analyse_request(request_headers):
@@ -30,5 +30,8 @@ def process(request_headers):
 
 	elif 'Wildfires' in request_headers.keys():
 		return str(db_manager.get_wildfires())
+
+	elif 'PushNews' in request_headers.keys():
+		return str([['title1', 'message1'],['title2', 'message2'],['title2', 'message2']])
 
 
