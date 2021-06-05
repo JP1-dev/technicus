@@ -36,7 +36,7 @@ def get_earthquakes(min_mag):
 def get_wildfires():
     conn= connect()
     cursor= conn.cursor()
-    cursor.execute(f"""SELECT latitude, longitude, confidence FROM wildfires""")
+    cursor.execute(f"""SELECT latitude, longitude, confidence FROM wildfires WHERE confidence>90""")
     data= cursor.fetchall()
     cursor.close()
     conn.close()
