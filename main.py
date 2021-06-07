@@ -8,7 +8,7 @@ app= Flask(__name__)
 
 authenticater= authentication.Authentication()
 
-key= '6ru6dsh5kD8oHC79a_78segQ5_eR96'
+key= '6ru6dsh5kD8oHC79a_78segQ5_eR96' #this is obviously not in production
 
 
 @app.route('/')
