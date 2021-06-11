@@ -6,7 +6,7 @@ import time
 def connect():
     connection= psycopg2.connect(
         user= 'jojo',
-        password= 'postgresqlisgreat',
+        password= 'postgresql4evver', #mega password
         host= 'localhost',
         port= '5432',
         database= 'technicus'
