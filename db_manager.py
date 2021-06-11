@@ -10,7 +10,7 @@ import schedule
 def connect():
     connection= psycopg2.connect(
         user= 'jojo',
-        password= 'postgresqlisgreat',
+        password= 'postgresql4evver', #mega password
         host= 'localhost',
         port= '5432',
         database= 'technicus'
@@ -33,10 +33,10 @@ def get_earthquakes(min_mag):
     return values
 
 
-def get_wildfires():
+def get_wildfires(min_confidence= 90):
     conn= connect()
     cursor= conn.cursor()
-    cursor.execute(f"""SELECT latitude, longitude, confidence FROM wildfires WHERE confidence>90""")
+    cursor.execute(f"""SELECT latitude, longitude, confidence FROM wildfires WHERE confidence>{min_confidence}""")
     data= cursor.fetchall()
     cursor.close()
     conn.close()
@@ -65,6 +65,6 @@ def feed_db():
 
 
 if __name__ == '__main__':
-    schedule.every(15).seconds.do(feed_db)
+    schedule.every(800).seconds.do(feed_db)
     while True:
         schedule.run_pending()
